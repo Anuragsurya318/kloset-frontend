@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ShopContext } from "../context/shop-context";
 
 export const Navbar = () => {
-  const { availableMoney, isAuthenticated, setIsAuthenticated } = useContext(ShopContext);
+  const { availableMoney, isAuthenticated, setIsAuthenticated, fetchAvailableMoney } =
+    useContext(ShopContext);
+
+  useEffect(() => {
+    fetchAvailableMoney();
+  }, []);
 
   const logout = () => {
     setIsAuthenticated(false);
